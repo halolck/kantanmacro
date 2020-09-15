@@ -278,7 +278,6 @@ namespace macroproject
             string[] keytype = key.Split(':');
             if (keytype[0] == "click")
             {
-                //Converter(keytype[1]);
                 switch (keytype[1])
                 {
                     case "LButton":

@@ -232,6 +232,10 @@ namespace macroproject
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Sakujogyou();
+        }
+        private void Sakujogyou()
+        {
             int senyoucount = 0;
             foreach (DataGridViewRow r in dataGridView1.SelectedRows)
             {
@@ -241,15 +245,14 @@ namespace macroproject
                     count--;
                 }
             }
-            while(senyoucount != dataGridView1.Rows.Count)
+            while (senyoucount != dataGridView1.Rows.Count)
             {
-                dataGridView1.Rows[senyoucount].Cells[0].Value = (senyoucount+1).ToString();
+                dataGridView1.Rows[senyoucount].Cells[0].Value = (senyoucount + 1).ToString();
 
                 senyoucount++;
 
             }
         }
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if(checkBox2.Checked == true)
@@ -546,7 +549,6 @@ namespace macroproject
             ofd.CheckFileExists = true;
             ofd.CheckPathExists = true;
 
-            //ダイアログを表示する
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 textBox5.Text = ofd.FileName;
@@ -593,7 +595,7 @@ namespace macroproject
             if (keyinputjoutai == true)
             {
                 foreach (Int32 i in Enum.GetValues(typeof(Keys)))
-                { // Recorre el Array de las teclas
+                { 
                     if (GetAsyncKeyState(i) == -32767)
                     {
                         key = Enum.GetName(typeof(Keys), i);
@@ -648,15 +650,14 @@ namespace macroproject
                     ContextMenuStrip cntmenu = new ContextMenuStrip();
                     {
                         ToolStripMenuItem newcontitem = new ToolStripMenuItem();
-                        newcontitem.Text = "終了(&Q)";
+                        newcontitem.Text = "選択している行を削除";
                         newcontitem.Click += delegate
                         {
-                            // 閉じる
-                            this.Close();
+                            Sakujogyou();
                         };
                         cntmenu.Items.Add(newcontitem);
                     }
-                    this.ContextMenuStrip = cntmenu;  //フォームの右クリック
+                    this.ContextMenuStrip = cntmenu;
                 }
                 
             }
