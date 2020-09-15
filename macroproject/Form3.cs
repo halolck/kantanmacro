@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,11 +9,10 @@ namespace macroproject
 {
     public partial class Form3 : Form
     {
-        public Form3()
-        {
-            InitializeComponent();
-        }
+
+        #region フィールド
         public Form1 f1;
+        GlobalKeyboardHook gHook;
         private string sendData = "";
         private string sendData2 = "";
         private const int MOUSEEVENTF_LEFTDOWN = 0x2;
@@ -30,36 +23,23 @@ namespace macroproject
         private const int MOUSEEVENTF_MBUTTONUP = 0x40;
         private const int MOUSEEVENTF_XBUTTON1DOWN = 0x80;
         private const int MOUSEEVENTF_XBUTTON1UP = 0x100;
-
         const int WS_EX_TOOLWINDOW = 0x00000080;
-
-        [DllImport("USER32.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form3_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Escape)
-            {
-                this.Close();
-            }
-            if (e.KeyData == Keys.End)
-            {
-                End();
-            }
-        }
         string macrodousa;
+        string timemoji;
+        string applicationname;
         DateTime time;
         bool timecheck;
-        string timemoji;
         bool roop = false;
+        bool syoricheck = true;
+        bool endcheck = false;
+        bool mousecheck = true;
         int count;
         int commnadtype = 0;
-        string applicationname;
-        public string SendData//ここは早めにしっかりとした送り方に直したい。問題点は複数あるので何度も送りなおす必要がありそうなところ(今は１度で一気に送っているが不安定)
+        string[] mousejiku;
+        #endregion
+
+        #region プロパティー
+        public string SendData
         {
             set
             {
@@ -72,14 +52,258 @@ namespace macroproject
                 return sendData;
             }
         }
-        bool nextcheck = true;
 
-        async void Macrosetting()
+        public string SendData2
+        {
+            set
+            {
+                sendData2 = value;
+                End();
+            }
+            get
+            {
+                return sendData2;
+            }
+        }
+
+        public void gHook_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.End)
+            {
+                End();
+            }
+        }
+        #endregion
+
+        #region コンストラクタ
+        public Form3()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region プライベート関数
+
+        private void Form3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.End)
+            {
+                End();
+            }
+        }
+
+        private void Macro(int macrocount, bool timecheck, string jikan, string jiku, string key, int taiki, int commandtype1, string commandname)
+        {
+            if (endcheck != true)
+            {
+                if (jiku == "無し")
+                {
+                    mousecheck = false;
+                }
+                else
+                {
+                    mousecheck = true;
+                    mousejiku = jiku.Split(',');
+                }
+
+                switch (commandtype1)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        System.Diagnostics.Process p = System.Diagnostics.Process.Start(commandname);
+                        break;
+                    case 2:
+                        System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName(commandname);
+                        foreach (System.Diagnostics.Process pc in ps)
+                        {
+                            pc.Kill();
+                        }
+                        break;
+                    case 3:
+                        try
+                        {
+                            ProcessStartInfo psi = new ProcessStartInfo();
+                            psi.FileName = "shutdown.exe";
+                            psi.Arguments = "-s -t 0";
+
+                            psi.CreateNoWindow = true;
+                            Process psd = Process.Start(psi);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
+                        }
+                        break;
+                    case 4:
+                        try
+                        {
+                            ProcessStartInfo psi = new ProcessStartInfo();
+                            psi.FileName = "shutdown.exe";
+                            psi.Arguments = "-r -t 0";
+                            psi.CreateNoWindow = true;
+                            Process prb = Process.Start(psi);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
+                        }
+                        break;
+                    case 5:
+                        MessageBox.Show(commandname);
+                        break;
+                    case 6:
+                        Process.Start("chrome.exe", commandname);
+                        break;
+                    case 7:
+                        label1.Location = new Point(2, 2);
+                        label1.Text = commandname;
+                        break;
+
+                }
+                if (mousecheck == true)
+                {
+                    int xjiku = Int32.Parse(mousejiku[0]);
+                    int yjiku = Int32.Parse(mousejiku[1]);
+                    System.Windows.Forms.Cursor.Position = new System.Drawing.Point(xjiku, yjiku);
+
+                }
+
+
+
+                string[] keytype = key.Split(':');
+                if (keytype[0] == "click")
+                {
+                    switch (keytype[1])
+                    {
+                        case "LButton":
+                            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                            break;
+                        case "RButton":
+                            mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+                            mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+                            break;
+                        case "MButton":
+                            mouse_event(MOUSEEVENTF_MBUTTONDOWN, 0, 0, 0, 0);
+                            mouse_event(MOUSEEVENTF_MBUTTONUP, 0, 0, 0, 0);
+
+                            break;
+                        case "XButton":
+                            mouse_event(MOUSEEVENTF_XBUTTON1DOWN, 0, 0, 0, 0);
+                            mouse_event(MOUSEEVENTF_XBUTTON1UP, 0, 0, 0, 0);
+                            break;
+
+                        default:
+                            SendKeys.Send("{" + keytype[1] + "}");
+                            break;
+                    }
+
+
+
+                }
+                if (keytype[0] == "send")
+                {
+                    SendKeys.Send(keytype[1]);
+                }
+
+                syoricheck = true;
+            }
+
+        }
+        private void Taikimacro(int wait, int commandtype, string commanname)
+        {
+            if (endcheck != true)
+            {
+                switch (commandtype)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        System.Diagnostics.Process p = System.Diagnostics.Process.Start(commanname);
+                        break;
+                    case 2:
+                        System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName(commanname);
+                        foreach (System.Diagnostics.Process pc in ps)
+                        {
+                            pc.Kill();
+                        }
+                        break;
+                    case 3:
+                        try
+                        {
+                            ProcessStartInfo psi = new ProcessStartInfo();
+                            psi.FileName = "shutdown.exe";
+                            psi.Arguments = "-s -t 0";
+
+                            psi.CreateNoWindow = true;
+                            Process psd = Process.Start(psi);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("エラーが発生しました", "エラー");
+                        }
+                        break;
+                    case 4:
+                        try
+                        {
+                            ProcessStartInfo psi = new ProcessStartInfo();
+                            psi.FileName = "shutdown.exe";
+                            psi.Arguments = "-r -t 0";
+                            psi.CreateNoWindow = true;
+                            Process prb = Process.Start(psi);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("エラーが発生しました", "エラー");
+                        }
+                        break;
+                    case 5:
+                        MessageBox.Show(commanname);
+                        break;
+                    case 6:
+                        Process.Start("chrome.exe", commanname);
+                        break;
+                    case 7:
+                        label1.Location = new Point(2, 2);
+                        label1.Text = commanname;
+                        break;
+
+                }
+                syoricheck = true;
+            }
+        }
+
+        private void End()
+        {
+            label1.Text = "";
+            endcheck = true;
+            this.Close();
+        }
+
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (f1 != null)
+            {
+                f1.ReceiveData2 = 0;
+            }
+        }
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            gHook = new GlobalKeyboardHook(); // Create a new GlobalKeyboardHook
+            gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+                gHook.HookedKeys.Add(key);
+            gHook.hook();
+        }
+        #endregion
+
+        #region async
+        async Task Macrosetting()
         {
             count = 0;
             string[] gyousu = macrodousa.Split('\b');
             string[] macrowake1 = gyousu[2].Split('\r');
-
             int roopcheck = Int32.Parse(gyousu[0]);
             if (roopcheck == 0)
             {
@@ -89,10 +313,10 @@ namespace macroproject
             {
                 roop = true;
             }
+
             while (count < Int32.Parse(gyousu[1]))
             {
-
-                string[] macrowake = macrowake1[count].Split('\n');//その行の内容
+                string[] macrowake = macrowake1[count].Split('\n');
                 int waittime = Int32.Parse(macrowake[4]);
                 if (waittime != 0)
                 {
@@ -121,12 +345,16 @@ namespace macroproject
                         case "パソコン再起動":
                             commnadtype = 4;
                             break;
-                        case "メッセージ":
+                        case "メッセージ1":
                             commnadtype = 5;
                             applicationname = applicationwake0[1];
                             break;
                         case "url":
                             commnadtype = 6;
+                            applicationname = applicationwake0[1];
+                            break;
+                        case "メッセージ2":
+                            commnadtype = 7;
                             applicationname = applicationwake0[1];
                             break;
                         default:
@@ -173,7 +401,7 @@ namespace macroproject
                         case "パソコン再起動":
                             commnadtype = 4;
                             break;
-                        case "メッセージ":
+                        case "メッセージ1":
                             commnadtype = 5;
                             applicationname = applicationwake0[1];
 
@@ -182,8 +410,12 @@ namespace macroproject
                             commnadtype = 6;
                             applicationname = applicationwake0[1];
                             break;
-                        
+                        case "メッセージ2":
+                            commnadtype = 7;
+                            applicationname = applicationwake0[1];
+                            break;
                     }
+
                     if (timecheck == true)
                     {
                         string timenow = DateTime.Now.ToString("HH:mm:ss");
@@ -199,220 +431,30 @@ namespace macroproject
                         Macro(counter, false, timemoji, jiku, key, waittime, commnadtype, applicationname);
                     }
 
-                    nextcheck = false;
                 }
 
-
+                syoricheck = false;
 
                 count++;
 
             }
-
-            End();
-        }
-        bool firstcheck = false;
-        bool mousecheck = true;
-        string[] mousejiku;
-        private void Macro(int macrocount, bool timecheck, string jikan, string jiku, string key, int taiki, int commandtype1, string commandname)
-        {
-            if (jiku == "無し")
+            if (roop == true)
             {
-                mousecheck = false;
+                Macrosetting();
             }
             else
             {
-                mousecheck = true;
-                mousejiku = jiku.Split(',');
-            }
-
-
-            switch (commandtype1)
-            {
-                case 0:
-                    break;
-                case 1:
-                    System.Diagnostics.Process p = System.Diagnostics.Process.Start(commandname);
-                    break;
-                case 2:
-                    System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName(commandname);
-                    foreach (System.Diagnostics.Process pc in ps)
-                    {
-                        pc.Kill();
-                    }
-                    break;
-                case 3:
-                    try
-                    {
-                        ProcessStartInfo psi = new ProcessStartInfo();
-                        psi.FileName = "shutdown.exe";
-                        psi.Arguments = "-s -t 0";
-
-                        psi.CreateNoWindow = true;
-                        Process psd = Process.Start(psi);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
-                    }
-                    break;
-                case 4:
-                    try
-                    {
-                        ProcessStartInfo psi = new ProcessStartInfo();
-                        psi.FileName = "shutdown.exe";
-                        psi.Arguments = "-r -t 0";
-                        psi.CreateNoWindow = true;
-                        Process prb = Process.Start(psi);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
-                    }
-                    break;
-                case 5:
-                    MessageBox.Show(commandname);
-                    break;
-                case 6:
-                    Process.Start("chrome.exe", commandname);
-                    break;
-
-            }
-            if(mousecheck == true)
-            {
-                int xjiku = Int32.Parse(mousejiku[0]);
-                int yjiku = Int32.Parse(mousejiku[1]);
-                System.Windows.Forms.Cursor.Position = new System.Drawing.Point(xjiku, yjiku);
-
-            }
-
-
-
-            string[] keytype = key.Split(':');
-            if (keytype[0] == "click")
-            {
-                switch (keytype[1])
-                {
-                    case "LButton":
-                        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-                        break;
-                    case "RButton":
-                        mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
-                        mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
-                        break;
-                    case "MButton":
-                        mouse_event(MOUSEEVENTF_MBUTTONDOWN, 0, 0, 0, 0);
-                        mouse_event(MOUSEEVENTF_MBUTTONUP, 0, 0, 0, 0);
-
-                        break;
-                    case "XButton":
-                        mouse_event(MOUSEEVENTF_XBUTTON1DOWN, 0, 0, 0, 0);
-                        mouse_event(MOUSEEVENTF_XBUTTON1UP, 0, 0, 0, 0);
-                        break;
-
-                    default:
-                        SendKeys.Send("{" + keytype[1] + "}");
-                        break;
-                }
-
-
-
-            }
-            if (keytype[0] == "send")
-            {
-                SendKeys.Send(keytype[1]);
-            }
-
-            nextcheck = true;
-            //f1.ReceiveData2 =macrocount;
-
-        }
-        private void Taikimacro(int wait, int commandtype, string commanname)
-        {
-
-            switch (commandtype)
-            {
-                case 0:
-                    break;
-                case 1:
-                    System.Diagnostics.Process p = System.Diagnostics.Process.Start(commanname);
-                    break;
-                case 2:
-                    System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName(commanname);
-                    foreach (System.Diagnostics.Process pc in ps)
-                    {
-                        pc.Kill();
-                    }
-                    break;
-                case 3:
-                    try
-                    {
-                        ProcessStartInfo psi = new ProcessStartInfo();
-                        psi.FileName = "shutdown.exe";
-                        psi.Arguments = "-s -t 0";
-
-                        psi.CreateNoWindow = true;
-                        Process psd = Process.Start(psi);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("エラーが発生しました", "エラー");
-                    }
-                    break;
-                case 4:
-                    try
-                    {
-                        ProcessStartInfo psi = new ProcessStartInfo();
-                        psi.FileName = "shutdown.exe";
-                        psi.Arguments = "-r -t 0";
-                        psi.CreateNoWindow = true;
-                        Process prb = Process.Start(psi);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("エラーが発生しました", "エラー");
-                    }
-                    break;
-                case 5:
-                    MessageBox.Show(commanname);
-                    break;
-                case 6:
-                    Process.Start("chrome.exe", commanname);
-                    break;
-
-            }
-            nextcheck = true;
-        }
-        
-        public string SendData2
-        {
-            set
-            {
-                sendData2 = value;
                 End();
             }
-            get
-            {
-                return sendData2;
-            }
         }
-        private void End()
-        {
-            while(firstcheck == true)
-            {
+        #endregion
 
-            }
-            this.Close();
-        }
+        #region dllimport
+        [DllImport("USER32.dll", CallingConvention = CallingConvention.StdCall)]
+        static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        #endregion
 
-        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (f1 != null)
-            {
-                f1.ReceiveData2 = 0;
-            }
-        }
-
+        #region protected
         protected override CreateParams CreateParams
         {
             get
@@ -422,10 +464,7 @@ namespace macroproject
                 return cp;
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
+ 
     }
 }

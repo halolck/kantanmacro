@@ -116,7 +116,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(473, 574);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // Column1
             // 
@@ -226,12 +225,13 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "無し",
+            "メッセージ(マクロ一時停止)",
+            "メッセージを左上に表示",
             "アプリケーションの起動",
             "アプリケーションの終了",
+            "urlを開く(chromeonly)",
             "パソコンの電源を切る",
-            "パソコンを再起動",
-            "メッセージ(マクロ一時停止)",
-            "urlを開く(chromeonly)"});
+            "パソコンを再起動"});
             this.comboBox2.Location = new System.Drawing.Point(6, 18);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(133, 20);
@@ -323,7 +323,6 @@
             this.textBox6.TabIndex = 12;
             this.textBox6.Text = "LButton";
             this.textBox6.Click += new System.EventHandler(this.textBox6_Click);
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // radioButton5
             // 
@@ -411,7 +410,6 @@
             this.textBox2.Size = new System.Drawing.Size(100, 19);
             this.textBox2.TabIndex = 3;
             this.textBox2.Text = "0";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // textBox1
@@ -537,9 +535,9 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(160, 22);
+            this.comboBox1.Location = new System.Drawing.Point(100, 22);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(124, 20);
+            this.comboBox1.Size = new System.Drawing.Size(184, 20);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
@@ -547,11 +545,11 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(101, 24);
+            this.checkBox1.Location = new System.Drawing.Point(100, 6);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(53, 16);
+            this.checkBox1.Size = new System.Drawing.Size(97, 16);
             this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "ループ";
+            this.checkBox1.Text = "ループ(不安定)";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -572,11 +570,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(99, 9);
+            this.label6.Location = new System.Drawing.Point(203, 7);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 12);
+            this.label6.Size = new System.Drawing.Size(82, 12);
             this.label6.TabIndex = 10;
-            this.label6.Text = "ENDキーで強制停止";
+            this.label6.Text = "ENDキーで停止";
             // 
             // openFileDialog1
             // 

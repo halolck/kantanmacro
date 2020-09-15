@@ -125,7 +125,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
-            this.Opacity = 0.5D;
+            this.Opacity = 0.75D;
             this.ShowInTaskbar = false;
             this.Text = "Form2";
             this.TopMost = true;
