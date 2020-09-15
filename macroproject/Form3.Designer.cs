@@ -28,13 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // timer1
+            // label1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Yellow;
+            this.label1.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(2, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 24);
+            this.label1.TabIndex = 0;
             // 
             // Form3
             // 
@@ -42,6 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(81, 76);
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form3";
             this.ShowInTaskbar = false;
@@ -52,11 +58,11 @@
             this.Load += new System.EventHandler(this.Form3_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form3_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label1;
     }
 }

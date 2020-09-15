@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace macroproject
 {
     public partial class Form2 : Form
     {
-        public Form2()
-        {
-            InitializeComponent();
-        }
+        #region フィールド
         public Form1 f1;
-
         const int WS_EX_TOOLWINDOW = 0x00000080;
         int x = 0;
         int y = 0;
         int h = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         int w = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        #endregion
+
+        #region コンストラクタ
+        public Form2()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region プライベート関数
         private void Form2_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -38,16 +37,16 @@ namespace macroproject
             y = System.Windows.Forms.Cursor.Position.Y;
             label1.Text = "X:" + x;
             label2.Text = "Y:" + y;
-            if(x<w/2)
+            if (x < w / 2)
             {
-                panel1.Left = x +5;
+                panel1.Left = x + 5;
             }
             else
             {
                 panel1.Left = x - 176;
             }
 
-            if (y<h/2)
+            if (y < h / 2)
             {
                 panel1.Top = y + 20;
             }
@@ -61,11 +60,11 @@ namespace macroproject
         {
             if (e.KeyData == Keys.S)
             {
-                
-                MessageBox.Show("マウス位置を保存しました。\r\nX:" + x + "\r\nY:" + y,"マウス設定");
+                panel1.Visible = false;
+                MessageBox.Show("マウス位置を保存しました。\r\nX:" + x + "\r\nY:" + y, "マウス設定");
                 if (f1 != null)
                 {
-                    f1.ReceiveData = x.ToString()+"\a"+ y.ToString();
+                    f1.ReceiveData = x.ToString() + "\a" + y.ToString();
                 }
                 this.Close();
             }
@@ -91,7 +90,16 @@ namespace macroproject
 
 
         }
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (f1 != null)
+            {
+                f1.ReceiveData1 = "kakunin";
+            }
+        }
+        #endregion
 
+        #region protected
         protected override CreateParams CreateParams
         {
             get
@@ -101,13 +109,6 @@ namespace macroproject
                 return cp;
             }
         }
-
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (f1 != null)
-            {
-                f1.ReceiveData1 = "kakunin";
-            }
-        }
+        #endregion
     }
 }
