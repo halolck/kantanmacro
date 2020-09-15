@@ -125,6 +125,12 @@ namespace macroproject
                             commnadtype = 5;
                             applicationname = applicationwake0[1];
                             break;
+                        case "url":
+                            commnadtype = 6;
+                            applicationname = applicationwake0[1];
+                            break;
+                        default:
+                            break;
                     }
 
                     Taikimacro(waittime, commnadtype, applicationname);
@@ -172,9 +178,11 @@ namespace macroproject
                             applicationname = applicationwake0[1];
 
                             break;
-                        default:
-                            MessageBox.Show(applicationwake0[0]);
+                        case "url":
+                            commnadtype = 6;
+                            applicationname = applicationwake0[1];
                             break;
+                        
                     }
                     if (timecheck == true)
                     {
@@ -244,7 +252,7 @@ namespace macroproject
                     }
                     catch
                     {
-                        MessageBox.Show("エラーが発生しました", "エラー");
+                        MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
                     }
                     break;
                 case 4:
@@ -258,12 +266,16 @@ namespace macroproject
                     }
                     catch
                     {
-                        MessageBox.Show("エラーが発生しました", "エラー");
+                        MessageBox.Show("エラーが発生しました。\r\nOKを押したら続きからスタートします。", "エラー");
                     }
                     break;
                 case 5:
                     MessageBox.Show(commandname);
                     break;
+                case 6:
+                    Process.Start("chrome.exe", commandname);
+                    break;
+
             }
             if(mousecheck == true)
             {
@@ -364,6 +376,10 @@ namespace macroproject
                 case 5:
                     MessageBox.Show(commanname);
                     break;
+                case 6:
+                    Process.Start("chrome.exe", commanname);
+                    break;
+
             }
             nextcheck = true;
         }

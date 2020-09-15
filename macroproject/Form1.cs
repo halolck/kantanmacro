@@ -97,6 +97,11 @@ namespace macroproject
                         commandsend = "メッセージ:" + textBox5.Text;
                         comboBox2.SelectedIndex = 0;
                         break;
+                    case 6:
+                        commandsend = "url:" + textBox5.Text;
+                        comboBox2.SelectedIndex = 0;
+                        break;
+                   
 
                 }
                 dataGridView1.Rows.Add(count, "待機", "", "", textBox4.Text, commandsend);
@@ -158,6 +163,10 @@ namespace macroproject
                         break;
                     case 5:
                         commandsend = "メッセージ:" + textBox5.Text;
+                        comboBox2.SelectedIndex = 0;
+                        break;
+                    case 6:
+                        commandsend = "url:" + textBox5.Text;
                         comboBox2.SelectedIndex = 0;
                         break;
                 }
@@ -450,18 +459,21 @@ namespace macroproject
                     string applihenkan = applisyoki.Replace("起動:", "起動\f");
                     string applihenkan2 = applihenkan.Replace("終了:", "終了\f");
                     string applihenkanlast1 = applihenkan2.Replace("メッセージ:", "メッセージ\f");
+                    string applihenkanlast2 = applihenkanlast1.Replace("url:", "url\f");
 
-                    string[] applinemahenkan = applihenkan2.Split('\f');
+                    string[] applinemahenkan = applihenkanlast2.Split('\f');
 
-                    string macrookuri = roopcheck.ToString() + "\b" + dataGridView1.Rows.Count.ToString() + "\b" + dataGridView1.Rows[0].Cells[0].Value + "\n" + dataGridView1.Rows[0].Cells[1].Value + "\n" + dataGridView1.Rows[0].Cells[2].Value + "\n" + dataGridView1.Rows[0].Cells[3].Value + "\n" + dataGridView1.Rows[0].Cells[4].Value + "\n" + applihenkanlast1 + "\n" + applinemahenkan;
+                    string macrookuri = roopcheck.ToString() + "\b" + dataGridView1.Rows.Count.ToString() + "\b" + dataGridView1.Rows[0].Cells[0].Value + "\n" + dataGridView1.Rows[0].Cells[1].Value + "\n" + dataGridView1.Rows[0].Cells[2].Value + "\n" + dataGridView1.Rows[0].Cells[3].Value + "\n" + dataGridView1.Rows[0].Cells[4].Value + "\n" + applihenkanlast2 + "\n" + applinemahenkan;
                     while (rowscount != dataGridView1.Rows.Count)
                     {
                         string applisyoki1 = dataGridView1.Rows[rowscount].Cells[5].Value.ToString();
                         string applihenkan3 = applisyoki1.Replace("起動:", "起動\f");
                         string applihenkan4 = applihenkan3.Replace("終了:", "終了\f");
-                        string applihenkanlast2 = applihenkan4.Replace("メッセージ:", "メッセージ\f");
+                        string applihenkanlast3 = applihenkan4.Replace("メッセージ:", "メッセージ\f");
+                        string applihenkanlast4 = applihenkanlast3.Replace("url:", "url\f");
+                        string[] applinemahenkan2 = applihenkanlast4.Split('\f');
 
-                        macrookuri += "\r" + dataGridView1.Rows[rowscount].Cells[0].Value + "\n" + dataGridView1.Rows[rowscount].Cells[1].Value + "\n" + dataGridView1.Rows[rowscount].Cells[2].Value + "\n" + dataGridView1.Rows[rowscount].Cells[3].Value + "\n" + dataGridView1.Rows[rowscount].Cells[4].Value + "\n" + applihenkanlast2 + "\n" + applinemahenkan;
+                        macrookuri += "\r" + dataGridView1.Rows[rowscount].Cells[0].Value + "\n" + dataGridView1.Rows[rowscount].Cells[1].Value + "\n" + dataGridView1.Rows[rowscount].Cells[2].Value + "\n" + dataGridView1.Rows[rowscount].Cells[3].Value + "\n" + dataGridView1.Rows[rowscount].Cells[4].Value + "\n" + applihenkanlast4 + "\n" + applinemahenkan2;
                         rowscount++;
 
                     }
@@ -535,6 +547,12 @@ namespace macroproject
                     button8.Enabled = false;
                     label7.Text = "メッセ―ジ内容";
                     commandcombo = 5;
+                    break;
+                case "urlを開く(chromeonly)":
+                    textBox5.Enabled = true;
+                    button8.Enabled = false;
+                    label7.Text = "url";
+                    commandcombo = 6;
                     break;
             }
         }
