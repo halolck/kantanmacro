@@ -9,26 +9,6 @@ namespace macroproject
 {
     public partial class Form1 : Form
     {
-        #region フィールド
-        Form2 f2;
-        Form3 f3;
-        private string receiveData = "";
-        private string receiveData1 = "";
-        private string key = "LButton";
-        private string time;
-        private string sendkey;
-        private string commandsend;
-        private int reciveData2;
-        private int reciveData3;
-        private int commandcombo = 0;
-        private int rowscount;
-        private int backcount;
-        private int roopcheck = 0;
-        private int count = 0;
-        private bool roop = false;
-        private bool keyinputjoutai = false;
-        #endregion
-
         #region プロパティ
         public string ReceiveData
         {
@@ -87,6 +67,26 @@ namespace macroproject
                 return reciveData3;
             }
         }
+        #endregion
+
+        #region フィールド
+        Form2 f2;
+        Form3 f3;
+        private string receiveData = "";
+        private string receiveData1 = "";
+        private string key = "LButton";
+        private string time;
+        private string sendkey;
+        private string commandsend;
+        private int reciveData2;
+        private int reciveData3;
+        private int commandcombo = 0;
+        private int rowscount;
+        private int backcount;
+        private int roopcheck = 0;
+        private int count = 0;
+        private bool roop = false;
+        private bool keyinputjoutai = false;
         #endregion
 
         #region コンストラクタ
@@ -665,7 +665,7 @@ namespace macroproject
         private void button2_Click_1(object sender, EventArgs e)
         {
             MessageBox.Show("このツールは室伏がどのようなツールを作ったことあるか、と聞かれたときに出すために作ったツールです。\r\n元々uwscから" +
-                "プログラミング関係のものに興味を持ちました。そのためマクロスクリプトを作るだけでなくマクロを操作、作成するツールを自分で作ってみたいという重いからコノツールをつくりました。\r\n**今後の目標**\r\nコマンド種類を増やす\r\nループ、時間指定をしっかり作る\r\n安定化!!\r\n誰でも使えるわかりやすいものにする\r\n画像認識クリック(画像内ランダムクリックなど)の追加\r\n**はじめと比べて**\r\n・コマンドの追加(メッセージ表示)\r\n・コマンドを利用できない問題を訂正(指定文字列か確認の際文字列が普通に間違えていた)\r\n・マクロ中も止まらないように待機を変更(async利用)\r\n・時間指定追加", "このツールについて");
+                "プログラミング関係のものに興味を持ちました。そのためマクロスクリプトを作るだけでなくマクロを操作、作成するツールを自分で作ってみたいという重いからコノツールをつくりました。\r\n**今後の目標**\r\n安定化!!\r\n誰でも使えるわかりやすいものにする\r\n画像認識クリック(画像内ランダムクリックなど)の追加\r\n**はじめと比べて**\r\n・コマンドの追加(メッセージ表示)\r\n・コマンドを利用できない問題を訂正(指定文字列か確認の際文字列が普通に間違えていた)\r\n・マクロ中も止まらないように待機を変更(async利用)\r\n・時間指定,ループ追加", "このツールについて");
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -1011,7 +1011,7 @@ namespace macroproject
         }
         #endregion
 
-        #region diiinport
+        #region dllinport
         [DllImport("user32")] private static extern short GetAsyncKeyState(int vKey);
         #endregion
 

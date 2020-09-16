@@ -7,11 +7,11 @@ namespace macroproject
     {
         #region フィールド
         public Form1 f1;
-        const int WS_EX_TOOLWINDOW = 0x00000080;
-        int x = 0;
-        int y = 0;
-        int h = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-        int w = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        private const int WS_EX_TOOLWINDOW = 0x00000080;
+        private int x = 0;
+        private int y = 0;
+        private int h = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+        private int w = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         #endregion
 
         #region コンストラクタ

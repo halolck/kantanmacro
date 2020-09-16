@@ -9,12 +9,7 @@ namespace macroproject
 {
     public partial class Form3 : Form
     {
-
-        #region フィールド
-        public Form1 f1;
-        GlobalKeyboardHook gHook;
-        private string sendData = "";
-        private string sendData2 = "";
+        #region 定数
         private const int MOUSEEVENTF_LEFTDOWN = 0x2;
         private const int MOUSEEVENTF_LEFTUP = 0x4;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x8;
@@ -23,19 +18,7 @@ namespace macroproject
         private const int MOUSEEVENTF_MBUTTONUP = 0x40;
         private const int MOUSEEVENTF_XBUTTON1DOWN = 0x80;
         private const int MOUSEEVENTF_XBUTTON1UP = 0x100;
-        const int WS_EX_TOOLWINDOW = 0x00000080;
-        string macrodousa;
-        string timemoji;
-        string applicationname;
-        DateTime time;
-        bool timecheck;
-        bool roop = false;
-        bool syoricheck = true;
-        bool endcheck = false;
-        bool mousecheck = true;
-        int count;
-        int commnadtype = 0;
-        string[] mousejiku;
+        private const int WS_EX_TOOLWINDOW = 0x00000080;
         #endregion
 
         #region プロパティー
@@ -73,6 +56,25 @@ namespace macroproject
                 End();
             }
         }
+        #endregion
+
+        #region フィールド
+        public Form1 f1;
+        GlobalKeyboardHook gHook;
+        private string sendData = "";
+        private string sendData2 = "";
+        private string macrodousa;
+        private string timemoji;
+        private string applicationname;
+        private string[] mousejiku;
+        private bool timecheck;
+        private bool roop = false;
+        private bool syoricheck = true;
+        private bool endcheck = false;
+        private bool mousecheck = true;
+        private int count;
+        private int commnadtype = 0;
+        DateTime time;
         #endregion
 
         #region コンストラクタ
