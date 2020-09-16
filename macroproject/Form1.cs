@@ -14,19 +14,19 @@ namespace macroproject
         Form3 f3;
         private string receiveData = "";
         private string receiveData1 = "";
+        private string key = "LButton";
+        private string time;
+        private string sendkey;
+        private string commandsend;
         private int reciveData2;
         private int reciveData3;
-        string key = "LButton";
-        string time;
-        string sendkey;
-        string commandsend;
-        int commandcombo = 0;
-        int rowscount;
-        int backcount;
-        int roopcheck = 0;
-        int count = 0;
-        bool roop = false;
-        bool keyinputjoutai = false;
+        private int commandcombo = 0;
+        private int rowscount;
+        private int backcount;
+        private int roopcheck = 0;
+        private int count = 0;
+        private bool roop = false;
+        private bool keyinputjoutai = false;
         #endregion
 
         #region プロパティ
