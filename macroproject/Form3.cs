@@ -341,10 +341,10 @@ namespace macroproject
                             commnadtype = 2;
                             applicationname = applicationwake0[1];
                             break;
-                        case "パソコン終了":
+                        case "パソコンを終了":
                             commnadtype = 3;
                             break;
-                        case "パソコン再起動":
+                        case "パソコンを再起動":
                             commnadtype = 4;
                             break;
                         case "メッセージ1":
@@ -397,10 +397,10 @@ namespace macroproject
                             commnadtype = 2;
                             applicationname = applicationwake0[1];
                             break;
-                        case "パソコン終了":
+                        case "パソコンを終了":
                             commnadtype = 3;
                             break;
-                        case "パソコン再起動":
+                        case "パソコンを再起動":
                             commnadtype = 4;
                             break;
                         case "メッセージ1":
