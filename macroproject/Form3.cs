@@ -237,7 +237,7 @@ namespace macroproject
                             ProcessStartInfo psi = new ProcessStartInfo();
                             psi.FileName = "shutdown.exe";
                             psi.Arguments = "-s -t 0";
-
+                            psi.UseShellExecute = false;
                             psi.CreateNoWindow = true;
                             Process psd = Process.Start(psi);
                         }
@@ -253,6 +253,7 @@ namespace macroproject
                             psi.FileName = "shutdown.exe";
                             psi.Arguments = "-r -t 0";
                             psi.CreateNoWindow = true;
+                            psi.UseShellExecute = false;
                             Process prb = Process.Start(psi);
                         }
                         catch
@@ -341,10 +342,10 @@ namespace macroproject
                             commnadtype = 2;
                             applicationname = applicationwake0[1];
                             break;
-                        case "パソコン終了":
+                        case "パソコンを終了":
                             commnadtype = 3;
                             break;
-                        case "パソコン再起動":
+                        case "パソコンを再起動":
                             commnadtype = 4;
                             break;
                         case "メッセージ1":
@@ -397,10 +398,10 @@ namespace macroproject
                             commnadtype = 2;
                             applicationname = applicationwake0[1];
                             break;
-                        case "パソコン終了":
+                        case "パソコンを終了":
                             commnadtype = 3;
                             break;
-                        case "パソコン再起動":
+                        case "パソコンを再起動":
                             commnadtype = 4;
                             break;
                         case "メッセージ1":
@@ -442,7 +443,7 @@ namespace macroproject
             }
             if (roop == true)
             {
-                Macrosetting();
+                await Macrosetting();
             }
             else
             {

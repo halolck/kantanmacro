@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static macroproject.undoredo;
 
 namespace macroproject
 {
@@ -78,6 +79,7 @@ namespace macroproject
         private string time;
         private string sendkey;
         private string commandsend;
+        private string data;
         private int reciveData2;
         private int reciveData3;
         private int commandcombo = 0;
@@ -125,8 +127,19 @@ namespace macroproject
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            string back = "";
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    back += (dataGridView1[j, i].Value + "\b");
+                }
+                back += "\n";
+            }
             if (button3.Text == "作製")
             {
+
                 count++;
 
                 if (checkBox2.Checked == true)
@@ -247,7 +260,22 @@ namespace macroproject
             {
                 Hensyuhozon();
                 textBox5.ResetText();
+
+
             }
+            string gyou = "";
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    gyou += (dataGridView1[j, i].Value + "\b");
+                }
+                gyou += "\n";
+            }
+            Record(() => { data = gyou; }, () => { data = back; });//１つ前　＝ back １つ後 = gyou
+            button11.Enabled = false;
+            button10.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -258,7 +286,30 @@ namespace macroproject
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string back = "";
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    back += (dataGridView1[j, i].Value + "\b");
+                }
+                back += "\n";
+            }
             Sakujogyou();
+            string gyou = "";
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    gyou += (dataGridView1[j, i].Value + "\b");
+                }
+                gyou += "\n";
+            }
+            Record(() => { data = gyou; }, () => { data = back; });//１つ前　＝ back １つ後 = gyou
+            button11.Enabled = false;
+            button10.Enabled = true;
         }
         private void Sakujogyou()
         {
@@ -360,8 +411,19 @@ namespace macroproject
              MessageBoxButtons.YesNo,
             MessageBoxIcon.Exclamation,
             MessageBoxDefaultButton.Button2);
+
             if (result == DialogResult.Yes)
             {
+                string back = "";
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        back += (dataGridView1[j, i].Value + "\b");
+                    }
+                    back += "\n";
+                }
                 dataGridView1.Rows.Clear();
                 comboBox1.Items.Clear();
                 IEnumerable<string> files =
@@ -373,6 +435,19 @@ namespace macroproject
                     string[] f3 = f2.Split('.');
                     comboBox1.Items.Add(f3[0]);
                 }
+                string gyou = "";
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        gyou += (dataGridView1[j, i].Value + "\b");
+                    }
+                    gyou += "\n";
+                }
+                Record(() => { data = gyou; }, () => { data = back; });//１つ前　＝ back １つ後 = gyou
+                button11.Enabled = false;
+                button10.Enabled = true;
             }
             count = 0;
         }
@@ -1009,11 +1084,82 @@ namespace macroproject
                 textBox2.Enabled = true;
             }
         }
+
+        #region doundo
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            if (data != null)
+            {
+                dataGridView1.Rows.Clear();
+                Undo();
+                string cellLine;
+                string[] gyouwake = data.Split('\n');
+                dataGridView1.Rows.Clear();
+
+
+                foreach (string xx in gyouwake)
+                {
+                    cellLine = xx;
+                    if (xx != "")
+                    {
+                        dataGridView1.Rows.Add(xx.Split('\b'));
+                    }
+
+
+                }
+                button11.Enabled = true;
+
+            }
+
+
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (data != null)
+            {
+                dataGridView1.Rows.Clear();
+                Redo();
+                string cellLine;
+                string[] gyouwake = data.Split('\n');
+                dataGridView1.Rows.Clear();
+
+
+                foreach (string xx in gyouwake)
+                {
+                    cellLine = xx;
+                    if (xx != "")
+                    {
+                        dataGridView1.Rows.Add(xx.Split('\b'));
+                    }
+
+
+                    // MessageBox.Show(xx);
+                }
+
+                button10.Enabled = true;
+
+            }
+
+
+
+        }
+        #endregion
+
+
         #endregion
 
         #region dllinport
-        [DllImport("user32")] private static extern short GetAsyncKeyState(int vKey);
+        [DllImport("user32")] 
+        private static extern short GetAsyncKeyState(int vKey);
         #endregion
 
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
