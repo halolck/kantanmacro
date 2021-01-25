@@ -493,7 +493,6 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(482, 0);
@@ -501,6 +500,7 @@
             this.label1.Size = new System.Drawing.Size(179, 53);
             this.label1.TabIndex = 2;
             this.label1.Text = "00:00:00";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer1
             // 
@@ -552,9 +552,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(290, 5);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 16);
+            this.checkBox1.Size = new System.Drawing.Size(80, 16);
             this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "ループ(不安定)";
+            this.checkBox1.Text = "ループさせる";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
