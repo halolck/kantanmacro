@@ -92,11 +92,9 @@ namespace macroproject
         {
             get
             {
-                // doesn't execute normmaly
                 if (States.Count <= 0)
                     return null;
 
-                // doesn't execute normmaly
                 if (!IsInRange(0, States.Count - 1, CurrentStateIndex))
                     return null;
 

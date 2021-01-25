@@ -22,3 +22,15 @@ C:\Users\CRE\Downloads\macroproject\macroproject\macroproject\obj\Debug\macropro
 C:\Users\CRE\Downloads\macroproject\macroproject\macroproject\obj\Debug\macroproject.csproj.CoreCompileInputs.cache
 C:\Users\CRE\Downloads\macroproject\macroproject\macroproject\obj\Debug\macroproject.exe
 C:\Users\CRE\Downloads\macroproject\macroproject\macroproject\obj\Debug\macroproject.pdb
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\bin\Debug\macroproject.exe.config
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\bin\Debug\macroproject.exe
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\bin\Debug\macroproject.pdb
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.csprojAssemblyReference.cache
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.Form1.resources
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.Form2.resources
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.Form3.resources
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.Properties.Resources.resources
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.csproj.GenerateResource.cache
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.csproj.CoreCompileInputs.cache
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.exe
+C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.pdb

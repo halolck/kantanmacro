@@ -12,6 +12,7 @@ namespace macroproject
         private int y = 0;
         private int h = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         private int w = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        private int egg = 0;
         #endregion
 
         #region コンストラクタ
@@ -58,7 +59,7 @@ namespace macroproject
 
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.S)
+            if (e.KeyData == Keys.F)
             {
                 panel1.Visible = false;
                 MessageBox.Show("マウス位置を保存しました。\r\nX:" + x + "\r\nY:" + y, "マウス設定");
@@ -73,9 +74,28 @@ namespace macroproject
                 this.Close();
 
             }
-            if (e.KeyCode == Keys.M)
+
+            #region easteregg
+            if (e.KeyCode == Keys.M && egg == 0)
             {
-                MessageBox.Show("暇人なあなたへ\r\nよくこのメッセージを見つけたね!!コード見たのかな？\r\nそんな君には特別にランダムなマウス位置を保存しておくね!!", "隠しメッセージ");
+                egg = 1;
+                MessageBox.Show("1");
+            }
+
+
+            if (e.KeyCode == Keys.Y && egg == 1)
+            {
+                egg = 2;
+                MessageBox.Show("2");
+
+            }
+
+
+            if (e.KeyCode == Keys.S && egg == 2)
+            {
+                MessageBox.Show("3");
+
+                MessageBox.Show("暇人なあなたへ\r\nよくこのメッセージを見つけたね!!コード見たのかな？\r\nそんな君には特別にランダムなマウス位置を保存しておくね!!", "春卵1");
                 Random rx = new System.Random();
                 Random ry = new System.Random();
                 int randomx = rx.Next(0, w);
@@ -87,6 +107,11 @@ namespace macroproject
                 }
                 this.Close();
             }
+
+            #endregion
+
+
+
 
 
         }
