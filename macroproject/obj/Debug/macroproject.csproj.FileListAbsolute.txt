@@ -34,3 +34,16 @@ C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroprojec
 C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.csproj.CoreCompileInputs.cache
 C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.exe
 C:\Users\halolck\Downloads\kantanmacro-master\macroproject\obj\Debug\macroproject.pdb
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\bin\Debug\macroproject.exe.config
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\bin\Debug\macroproject.exe
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\bin\Debug\macroproject.pdb
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.Form1.resources
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.Form2.resources
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.Form3.resources
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.exe
+C:\Users\User\Documents\GitHub\kantanmacro\macroproject\obj\Debug\macroproject.pdb

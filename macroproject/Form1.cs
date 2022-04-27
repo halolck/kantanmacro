@@ -641,7 +641,7 @@ namespace macroproject
                     label7.Text = "メッセ―ジ内容";
                     commandcombo = 5;
                     break;
-                case "urlを開く(chromeonly)":
+                case "URLを開く":
                     textBox5.Enabled = true;
                     button8.Enabled = false;
                     label7.Text = "url";

@@ -155,7 +155,7 @@ namespace macroproject
                         MessageBox.Show(commandname);
                         break;
                     case 6:
-                        Process.Start("chrome.exe", commandname);
+                        Process.Start(commandname);
                         break;
                     case 7:
                         label1.Location = new Point(2, 2);
